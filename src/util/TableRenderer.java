@@ -17,12 +17,10 @@ public class TableRenderer {
         int rows = dp.length;
         int cols = dp[0].length;
         
-        // Header
         Label header = new Label(String.format("DP Table Analysis (%d tasks × %d hours)", rows, cols));
         header.getStyleClass().add("dp-header");
         container.getChildren().add(header);
         
-        // View mode selector
         HBox modeBox = new HBox(8);
         modeBox.setAlignment(Pos.CENTER_LEFT);
         Label modeLabel = new Label("View:");
@@ -43,17 +41,15 @@ public class TableRenderer {
         modeBox.getChildren().addAll(modeLabel, pathBtn, fullBtn);
         container.getChildren().add(modeBox);
         
-        // Content area
+
         StackPane contentStack = new StackPane();
         VBox.setVgrow(contentStack, Priority.ALWAYS);
         
-        // Different views
         VBox pathView = createSolutionPathView(dp, take);
         VBox fullView = createFullTableView(dp, take);
         
         contentStack.getChildren().addAll(pathView, fullView);
         
-        // Show only selected view
         pathView.setVisible(true);
         pathView.setManaged(true);
         fullView.setVisible(false);
@@ -72,15 +68,13 @@ public class TableRenderer {
         return container;
     }
     
-    // View 1: Solution Path (most useful)
     private static VBox createSolutionPathView(int[][] dp, boolean[][] take) {
         VBox view = new VBox(8);
         
         Label title = new Label("📍 Solution Path (Backtracking)");
         title.getStyleClass().add("heading");
         view.getChildren().add(title);
-        
-        // Extract solution path
+
         var path = extractSolutionPath(dp, take);
         
         if (path.isEmpty()) {
@@ -97,7 +91,6 @@ public class TableRenderer {
         pathGrid.setStyle("-fx-background-color: #F2F5F9; -fx-border-color: #C4D5E5; " +
                          "-fx-border-width: 1; -fx-border-radius: 2; -fx-background-radius: 2;");
         
-        // Headers
         pathGrid.add(createHeaderLabel("Step"), 0, 0);
         pathGrid.add(createHeaderLabel("Task"), 1, 0);
         pathGrid.add(createHeaderLabel("Time"), 2, 0);
@@ -129,7 +122,6 @@ public class TableRenderer {
         return view;
     }
     
-    // View 2: Full Table (optimized for performance)
     private static VBox createFullTableView(int[][] dp, boolean[][] take) {
         VBox view = new VBox(8);
         
@@ -139,8 +131,7 @@ public class TableRenderer {
         Label title = new Label("📋 Full Table");
         title.getStyleClass().add("heading");
         view.getChildren().add(title);
-        
-        // Info panel
+
         VBox infoBox = new VBox(4);
         infoBox.setPadding(new Insets(8));
         infoBox.setStyle("-fx-background-color: #E7EEF6; -fx-border-color: #C4D5E5; " +
@@ -163,30 +154,28 @@ public class TableRenderer {
         
         view.getChildren().add(infoBox);
         
-        // Create table with pagination/limits
+
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(false);
         scrollPane.setFitToHeight(false);
         scrollPane.setPrefViewportHeight(500);
         scrollPane.setPrefViewportWidth(700);
         scrollPane.getStyleClass().add("scroll");
-        
-        // Use lazy loading approach - only create visible cells
+
         GridPane grid = new GridPane();
         grid.setHgap(1);
         grid.setVgap(1);
         grid.setPadding(new Insets(4));
         grid.setStyle("-fx-background-color: #E7EEF6;");
-        
-        // Corner
+
         grid.add(createSmallHeaderCell("i\\t"), 0, 0);
         
-        // Column headers - only display what we need
+        // Column headers: only display what we need
         for (int c = 0; c < displayCols; c++) {
             grid.add(createSmallHeaderCell(String.valueOf(c)), c + 1, 0);
         }
         
-        // Rows - only display what we need
+        // Rows: only display what we need
         for (int r = 0; r < displayRows; r++) {
             grid.add(createSmallHeaderCell(String.valueOf(r)), 0, r + 1);
             
@@ -202,7 +191,6 @@ public class TableRenderer {
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
         view.getChildren().add(scrollPane);
         
-        // Add navigation controls if table is truncated
         if (rows > MAX_DISPLAY_ROWS || cols > MAX_DISPLAY_COLS) {
             Label navHint = new Label("💡 Tip: Use Solution Path view for detailed step-by-step analysis");
             navHint.getStyleClass().add("secondary");

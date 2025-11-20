@@ -13,7 +13,12 @@ import util.TableRenderer;
 import javafx.animation.*;
 import javafx.util.Duration;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.TransferMode;
 import javafx.scene.Node;
 import javafx.geometry.Pos;
 
@@ -32,7 +37,6 @@ public class App extends Application {
         root.setPadding(new Insets(8));
         Font.loadFont(getClass().getResourceAsStream("/resources/fonts/Monocraft.ttf"), 16);
         
-        // Top toolbar with buttons
         HBox top = new HBox(8);
         Button loadBtn = new Button("Load");
         Button saveBtn = new Button("Save");
@@ -54,12 +58,11 @@ public class App extends Application {
         taskListView.setCellFactory(lv -> new TaskCell());
         taskListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
-        // Left panel with search bar and task list
+
         VBox leftPanel = new VBox(8);
         Label taskListLabel = new Label("Tasks");
         taskListLabel.getStyleClass().add("heading");
         
-        // Search field
         searchField = new TextField();
         searchField.setPromptText("🔍 Search tasks...");
         searchField.setMaxWidth(Double.MAX_VALUE);
@@ -162,7 +165,6 @@ public class App extends Application {
         menuBar.getStyleClass().add("menu-bar");
         topContainer.getStyleClass().add("toolbar");
 
-        // Context menu for task list
         ContextMenu contextMenu = new ContextMenu();
         MenuItem deleteItem = new MenuItem("Delete");
         MenuItem duplicateItem = new MenuItem("Duplicate");
@@ -180,23 +182,22 @@ public class App extends Application {
             }
         });
 
-        // Search functionality
+
         searchField.textProperty().addListener((obs, oldVal, newVal) -> {
             filterTasks(newVal);
         });
 
-        // Load button action
+
         loadBtn.setOnAction(e -> loadTasks(stage, parser, loadBtn));
 
-        // Save button action
+
         saveBtn.setOnAction(e -> saveTasks(stage, parser, saveBtn));
 
-        // Delete button action
+
         deleteBtn.setOnAction(e -> deleteSelectedTasks());
 
-        // Add keyboard shortcut for delete
         scene.setOnKeyPressed(e -> {
-            if (e.getCode() == javafx.scene.input.KeyCode.DELETE && 
+            if (e.getCode() == KeyCode.DELETE && 
                 taskListView.isFocused() && 
                 !taskListView.getSelectionModel().getSelectedItems().isEmpty()) {
                 deleteSelectedTasks();
@@ -288,7 +289,6 @@ public class App extends Application {
 
 private void deleteSelectedTasks() {
     var selected = new ArrayList<Task>();
-    // Manually add all selected items to our custom ArrayList
     for (Task task : taskListView.getSelectionModel().getSelectedItems()) {
         selected.add(task);
     }
@@ -479,7 +479,7 @@ private void deleteSelectedTasks() {
     private ImageView loadIcon(String path) {
         var is = getClass().getResourceAsStream(path);
         if (is == null) return null;
-        javafx.scene.image.Image img = new javafx.scene.image.Image(is, 32, 32, true, false);
+        Image img = new Image(is, 32, 32, true, false);
         ImageView iv = new ImageView(img);
         iv.setFitWidth(32);
         iv.setFitHeight(32);
@@ -494,30 +494,30 @@ private void deleteSelectedTasks() {
                                    Scene scene, TaskParser parser) {
         Menu file = new Menu("File");
         MenuItem miLoad = new MenuItem("Load Tasks");
-        miLoad.setAccelerator(javafx.scene.input.KeyCombination.keyCombination("Ctrl+L"));
+        miLoad.setAccelerator(KeyCombination.keyCombination("Ctrl+L"));
         MenuItem miSave = new MenuItem("Save Tasks");
-        miSave.setAccelerator(javafx.scene.input.KeyCombination.keyCombination("Ctrl+S"));
+        miSave.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
         MenuItem miExit = new MenuItem("Exit");
-        miExit.setAccelerator(javafx.scene.input.KeyCombination.keyCombination("Alt+F4"));
+        miExit.setAccelerator(KeyCombination.keyCombination("Alt+F4"));
         file.getItems().addAll(miLoad, miSave, new SeparatorMenuItem(), miExit);
 
         Menu edit = new Menu("Edit");
         MenuItem miFind = new MenuItem("Find");
-        miFind.setAccelerator(javafx.scene.input.KeyCombination.keyCombination("Ctrl+F"));
+        miFind.setAccelerator(KeyCombination.keyCombination("Ctrl+F"));
         MenuItem miClearSearch = new MenuItem("Clear Search");
-        miClearSearch.setAccelerator(javafx.scene.input.KeyCombination.keyCombination("Esc"));
+        miClearSearch.setAccelerator(KeyCombination.keyCombination("Esc"));
         MenuItem miDelete = new MenuItem("Delete Selected");
-        miDelete.setAccelerator(javafx.scene.input.KeyCombination.keyCombination("Delete"));
+        miDelete.setAccelerator(KeyCombination.keyCombination("Delete"));
         edit.getItems().addAll(miFind, miClearSearch, new SeparatorMenuItem(), miDelete);
 
         Menu view = new Menu("View");
         CheckMenuItem miFull = new CheckMenuItem("Fullscreen");
-        miFull.setAccelerator(javafx.scene.input.KeyCombination.keyCombination("F11"));
+        miFull.setAccelerator(KeyCombination.keyCombination("F11"));
         view.getItems().add(miFull);
 
         Menu actions = new Menu("Actions");
         MenuItem miRun = new MenuItem("Run");
-        miRun.setAccelerator(javafx.scene.input.KeyCombination.keyCombination("Ctrl+R"));
+        miRun.setAccelerator(KeyCombination.keyCombination("Ctrl+R"));
         actions.getItems().add(miRun);
 
         MenuBar mb = new MenuBar(file, edit, view, actions);
@@ -545,13 +545,12 @@ private void deleteSelectedTasks() {
             taskListView.requestFocus();
         });
 
-        // Keyboard shortcuts
         scene.setOnKeyPressed(e -> {
-            if (e.isControlDown() && e.getCode() == javafx.scene.input.KeyCode.F) {
+            if (e.isControlDown() && e.getCode() == KeyCode.F) {
                 searchField.requestFocus();
                 searchField.selectAll();
                 e.consume();
-            } else if (e.getCode() == javafx.scene.input.KeyCode.ESCAPE) {
+            } else if (e.getCode() == KeyCode.ESCAPE) {
                 searchField.clear();
                 e.consume();
             }
@@ -623,8 +622,8 @@ private void deleteSelectedTasks() {
 
             setOnDragDetected(e -> {
                 if (getItem() == null) return;
-                var db = startDragAndDrop(javafx.scene.input.TransferMode.MOVE);
-                var content = new javafx.scene.input.ClipboardContent();
+                var db = startDragAndDrop(TransferMode.MOVE);
+                var content = new ClipboardContent();
                 content.putString(getItem().getName());
                 db.setContent(content);
                 e.consume();
@@ -632,7 +631,7 @@ private void deleteSelectedTasks() {
             
             setOnDragOver(e -> {
                 if (e.getGestureSource() != this && e.getDragboard().hasString()) {
-                    e.acceptTransferModes(javafx.scene.input.TransferMode.MOVE);
+                    e.acceptTransferModes(TransferMode.MOVE);
                 }
                 e.consume();
             });

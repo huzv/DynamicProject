@@ -9,7 +9,6 @@ public class ArrayList<E> implements Iterable<E> {
     private Object[] elements;
     private int size;
 
-    // Constructors
     public ArrayList() {
         this.elements = new Object[DEFAULT_CAPACITY];
         this.size = 0;
@@ -23,7 +22,6 @@ public class ArrayList<E> implements Iterable<E> {
         this.size = 0;
     }
 
-    // Copy constructor
     public ArrayList(ArrayList<? extends E> other) {
         this.size = other.size;
         this.elements = new Object[other.size];
@@ -32,7 +30,7 @@ public class ArrayList<E> implements Iterable<E> {
         }
     }
 
-    // Basic operations
+
     public boolean add(E element) {
         ensureCapacity(size + 1);
         elements[size++] = element;
@@ -51,9 +49,6 @@ public class ArrayList<E> implements Iterable<E> {
         elements[index] = element;
         size++;
     }
-
-
-    // Add after the add() methods in ArrayList.java
 
 public boolean addAll(ArrayList<? extends E> other) {
     if (other == null) {
@@ -117,7 +112,7 @@ public boolean addAll(int index, ArrayList<? extends E> other) {
             elements[i] = elements[i + 1];
         }
         
-        elements[--size] = null; // Help GC
+        elements[--size] = null;
         return oldValue;
     }
 
@@ -219,7 +214,7 @@ public boolean addAll(int index, ArrayList<? extends E> other) {
         elements[j] = temp;
     }
 
-    // Reverse the list
+
     public void reverse() {
         int left = 0;
         int right = size - 1;
@@ -231,7 +226,6 @@ public boolean addAll(int index, ArrayList<? extends E> other) {
         }
     }
 
-    // Convert to array
     public Object[] toArray() {
         Object[] result = new Object[size];
         for (int i = 0; i < size; i++) {
@@ -254,7 +248,6 @@ public boolean addAll(int index, ArrayList<? extends E> other) {
         return a;
     }
 
-    // Iterator implementation
     @Override
     public Iterator<E> iterator() {
         return new ArrayListIterator();
@@ -290,7 +283,6 @@ public boolean addAll(int index, ArrayList<? extends E> other) {
         }
     }
 
-    // Range checking
     private void rangeCheck(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
@@ -303,7 +295,6 @@ public boolean addAll(int index, ArrayList<? extends E> other) {
         }
     }
 
-    // Utility methods
     @Override
     public String toString() {
         if (size == 0) {

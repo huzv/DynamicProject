@@ -29,7 +29,7 @@ public class Greedy {
             if (time + task.getDuration() <= totalHours) {
                 chosen.add(task);
                 time += task.getDuration();
-                value += task.getProductivity();  // Fixed: was task.getDuration()
+                value += task.getProductivity();
             }
         }
         return new GreedyResult(chosen, time, value);

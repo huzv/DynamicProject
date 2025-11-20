@@ -57,7 +57,7 @@ public class Dynamic {
                 t -= task.getDuration();
             }
         }
-        chosen.reverse();  // Use our custom reverse method
+        chosen.reverse();
         return new DPResult(dp, take, chosen, totalTime, totalValue);
     }
 }
