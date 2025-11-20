@@ -1,0 +1,189 @@
+.root {
+  -fx-focus-color: #2F5D83;
+  -fx-faint-focus-color: rgba(47,93,131,0.2);
+}
+
+.app-root {
+  -fx-font-family: "Monocraft";
+  -fx-font-size: 16px;
+  -fx-text-fill: #1E1E24;
+  -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(249,251,252,1) 0%, rgba(249,251,252,1) 100%);
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 2;
+  -fx-effect: innershadow(gaussian, rgba(0,0,0,0.25), 10, 0.25, 0, 3);
+}
+
+.heading {
+  -fx-font-size: 24px;
+  -fx-text-fill: #1E1E24;
+}
+
+.secondary {
+  -fx-font-size: 12px;
+  -fx-opacity: 0.85;
+}
+
+.toolbar {
+  -fx-padding: 8px;
+  -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.6) 100%), #F2F5F9;
+  -fx-border-color: #C4D5E5;
+  -fx-border-width: 1px;
+  -fx-background-radius: 2px;
+  -fx-border-radius: 2px;
+}
+
+.btn {
+  -fx-background-color: #9BD1E5;
+  -fx-text-fill: #1E1E24;
+  -fx-border-color: #6EA7C7;
+  -fx-border-width: 2px;
+  -fx-background-radius: 4px;
+  -fx-border-radius: 4px;
+  -fx-padding: 8px 16px;
+}
+.btn:hover {
+  -fx-background-color: #8CC0DE;
+  -fx-border-color: #5A91AF;
+  -fx-effect: dropshadow(gaussian, rgba(106,167,199,0.35), 6, 0.25, 0, 0);
+}
+.btn:focused {
+  -fx-border-color: #2F5D83;
+  -fx-background-color: #8CC0DE;
+}
+.btn-primary {
+  -fx-background-color: #9BD1E5;
+  -fx-border-color: #6EA7C7;
+}
+.btn-secondary {
+  -fx-background-color: #F6B6C8;
+  -fx-border-color: #C290A4;
+}
+.btn-success {
+  -fx-background-color: #BEE7A5;
+  -fx-border-color: #83B876;
+}
+
+.input {
+  -fx-background-color: #FFFFFF;
+  -fx-text-fill: #1E1E24;
+  -fx-border-color: #C4D5E5;
+  -fx-border-width: 1.5px;
+  -fx-background-radius: 2px;
+  -fx-border-radius: 2px;
+  -fx-padding: 6px 8px;
+  -fx-background-insets: 0;
+}
+.input:focused {
+  -fx-border-color: #2F5D83;
+}
+
+.list {
+  -fx-background-color: #F2F5F9;
+  -fx-border-color: #C4D5E5;
+  -fx-border-width: 1px;
+  -fx-background-radius: 2px;
+  -fx-border-radius: 2px;
+}
+
+.list-view .list-cell {
+  -fx-background-color: transparent;
+  -fx-border-color: #D0D7E2;
+  -fx-border-width: 0 0 1px 0;
+}
+.list-view .list-cell:selected {
+  -fx-background-color: #9BD1E5;
+  -fx-text-fill: #1E1E24;
+}
+
+.scroll {
+  -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal {
+  -fx-background-color: transparent;
+}
+.scroll-bar .thumb {
+  -fx-background-color: #C4D5E5;
+  -fx-background-radius: 2px;
+  -fx-border-color: #6EA7C7;
+  -fx-border-width: 1px;
+}
+.scroll-bar .track {
+  -fx-background-color: rgba(0,0,0,0.05);
+  -fx-background-radius: 2px;
+}
+
+.code-area {
+  -fx-control-inner-background: #FFFFFF;
+  -fx-text-fill: #1E1E24;
+  -fx-border-color: #C4D5E5;
+  -fx-border-width: 1px;
+  -fx-border-radius: 2px;
+  -fx-background-radius: 2px;
+  -fx-background-insets: 0;
+}
+
+.icon-space {
+  -fx-min-width: 32px;
+  -fx-min-height: 32px;
+  -fx-padding: 4px;
+}
+
+.dp-header {
+  -fx-font-size: 16px;
+  -fx-text-fill: #1E1E24;
+}
+
+.dp-cell {
+  -fx-background-color: #F4F6FA;
+  -fx-text-fill: #1E1E24;
+  -fx-border-color: #D0D7E2;
+  -fx-border-width: 1px;
+  -fx-background-radius: 2px;
+  -fx-border-radius: 2px;
+  -fx-padding: 4px 6px;
+}
+.dp-cell--highlight {
+  -fx-background-color: #F9E7A1;
+  -fx-border-color: #C59B00;
+}
+
+.menu-bar {
+  -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.6) 100%), #E7EEF6;
+  -fx-border-color: #C4D5E5;
+  -fx-border-width: 0 0 1px 0;
+}
+
+.toggle-group .toggle-button {
+  -fx-background-color: #E7EEF6;
+  -fx-border-color: #C4D5E5;
+  -fx-border-width: 2px;
+  -fx-background-radius: 2px;
+  -fx-border-radius: 2px;
+  -fx-padding: 4px 8px;
+}
+.toggle-group .toggle-button:selected {
+  -fx-background-color: #9BD1E5;
+}
+
+.progress-bar {
+  -fx-accent: #9BD1E5;
+  -fx-padding: 2px;
+}
+.progress-bar .track {
+  -fx-background-color: #F4F6FA;
+  -fx-border-color: #D0D7E2;
+  -fx-border-width: 1px;
+}
+.progress-bar .bar {
+  -fx-background-color: #9BD1E5;
+}
+
+.formula-panel {
+  -fx-background-color: #E7EEF6;
+  -fx-border-color: #9BD1E5;
+  -fx-border-width: 1px;
+  -fx-background-radius: 2px;
+  -fx-border-radius: 2px;
+  -fx-padding: 8px;
+}
