@@ -1,3 +1,5 @@
+5
+8
 Study Algorithms,3,9
 Watch Lecture,2,6
 Do Homework,4,12

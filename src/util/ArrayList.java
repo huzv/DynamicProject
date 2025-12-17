@@ -30,7 +30,6 @@ public class ArrayList<E> implements Iterable<E> {
         }
     }
 
-
     public boolean add(E element) {
         ensureCapacity(size + 1);
         elements[size++] = element;
@@ -40,55 +39,55 @@ public class ArrayList<E> implements Iterable<E> {
     public void add(int index, E element) {
         rangeCheckForAdd(index);
         ensureCapacity(size + 1);
-        
+
         // Shift elements to the right
         for (int i = size; i > index; i--) {
             elements[i] = elements[i - 1];
         }
-        
+
         elements[index] = element;
         size++;
     }
 
-public boolean addAll(ArrayList<? extends E> other) {
-    if (other == null) {
-        throw new NullPointerException("Cannot add null collection");
-    }
-    if (other.isEmpty()) {
-        return false;
-    }
-    
-    ensureCapacity(size + other.size());
-    for (int i = 0; i < other.size(); i++) {
-        elements[size++] = other.get(i);
-    }
-    return true;
-}
+    public boolean addAll(ArrayList<? extends E> other) {
+        if (other == null) {
+            throw new NullPointerException("Cannot add null collection");
+        }
+        if (other.isEmpty()) {
+            return false;
+        }
 
-public boolean addAll(int index, ArrayList<? extends E> other) {
-    rangeCheckForAdd(index);
-    if (other == null) {
-        throw new NullPointerException("Cannot add null collection");
+        ensureCapacity(size + other.size());
+        for (int i = 0; i < other.size(); i++) {
+            elements[size++] = other.get(i);
+        }
+        return true;
     }
-    if (other.isEmpty()) {
-        return false;
+
+    public boolean addAll(int index, ArrayList<? extends E> other) {
+        rangeCheckForAdd(index);
+        if (other == null) {
+            throw new NullPointerException("Cannot add null collection");
+        }
+        if (other.isEmpty()) {
+            return false;
+        }
+
+        ensureCapacity(size + other.size());
+
+        // Shift existing elements to make room
+        for (int i = size - 1; i >= index; i--) {
+            elements[i + other.size()] = elements[i];
+        }
+
+        // Insert new elements
+        for (int i = 0; i < other.size(); i++) {
+            elements[index + i] = other.get(i);
+        }
+
+        size += other.size();
+        return true;
     }
-    
-    ensureCapacity(size + other.size());
-    
-    // Shift existing elements to make room
-    for (int i = size - 1; i >= index; i--) {
-        elements[i + other.size()] = elements[i];
-    }
-    
-    // Insert new elements
-    for (int i = 0; i < other.size(); i++) {
-        elements[index + i] = other.get(i);
-    }
-    
-    size += other.size();
-    return true;
-}
 
     @SuppressWarnings("unchecked")
     public E get(int index) {
@@ -106,12 +105,12 @@ public boolean addAll(int index, ArrayList<? extends E> other) {
     public E remove(int index) {
         rangeCheck(index);
         E oldValue = get(index);
-        
+
         // Shift elements to the left
         for (int i = index; i < size - 1; i++) {
             elements[i] = elements[i + 1];
         }
-        
+
         elements[--size] = null;
         return oldValue;
     }
@@ -214,11 +213,10 @@ public boolean addAll(int index, ArrayList<? extends E> other) {
         elements[j] = temp;
     }
 
-
     public void reverse() {
         int left = 0;
         int right = size - 1;
-        
+
         while (left < right) {
             swap(left, right);
             left++;
@@ -315,11 +313,14 @@ public boolean addAll(int index, ArrayList<? extends E> other) {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof ArrayList)) return false;
+        if (o == this)
+            return true;
+        if (!(o instanceof ArrayList))
+            return false;
 
         ArrayList<?> other = (ArrayList<?>) o;
-        if (size != other.size) return false;
+        if (size != other.size)
+            return false;
 
         for (int i = 0; i < size; i++) {
             Object e1 = elements[i];

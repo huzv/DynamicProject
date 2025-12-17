@@ -1,0 +1,38 @@
+36
+12
+Study Algorithms,3,9
+Watch Lecture,2,6
+Do Homework,4,12
+Exercise,2,5
+Read Book,1,3
+Practice Coding,2,10
+Review Notes,1.5,8
+Write Report,2.5,11
+Group Study Session,2,7
+Online Course Module,1.5,9
+Math Problems,2,10
+Clean Workspace,0.5,4
+Meal Prep,1,5
+Budget Planning,1,6
+Learn New Language,1,7
+Journaling,0.5,4
+Meditate,0.5,5
+Strategic Planning,1.5,9
+Email Inbox Management,1,5
+Research Project,3,12
+Flashcards,1,6
+Listen to Podcast,1,4
+Sketching,1,3
+Laundry,1,2
+Grocery Shopping,1.5,3
+Gardening,1.5,4
+Play Instrument,1,4
+Yoga,1,6
+Brainstorm Ideas,1,7
+Update Resume,1.5,8
+Plan Weekend,0.5,3
+Walk Dog,0.5,3
+Public Speaking Practice,1,9
+Organize Files,1,5
+Clean Kitchen,1,2
+Study History,2,7
